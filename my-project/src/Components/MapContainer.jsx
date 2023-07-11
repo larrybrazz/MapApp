@@ -8,7 +8,9 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export default function MapContainer() {
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
-  const [userLocation, setUserLocation] = useState({lat: 0 , lng: 0})
+  const [userLocation, setUserLocation] = useState({ lat: 0, lng: 0 });
+
+  const apiKey = import.meta.env.VITE_API_KEY
 
   useEffect(() => {
     // Get user's current location
@@ -44,7 +46,7 @@ export default function MapContainer() {
       <div style={{ height: "500px", width: "100%", position: "relative" }}>
         <GoogleMapReact
           bootstrapURLKeys={{
-            key: "AIzaSyBGie3efN_PQJzBMwKaccjzy_EvpBvTIOQ", // Replace with your actual API key
+            key: apiKey
           }}
           center={coordinates}
           defaultZoom={11}

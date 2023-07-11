@@ -47,7 +47,7 @@ const SearchInput = ({ setCoordinates }) => {
         <div className="">
           <div className="border border-zinc-600 rounded-lg flex justify-between items-center px-6 py-1 ">
             <input
-              className="outline-none text-center"
+              className="outline-none text-center w-[90%]"
               ref={parkNameRef}
               type="text"
               placeholder=" Caravan name"
@@ -60,10 +60,10 @@ const SearchInput = ({ setCoordinates }) => {
           </div>
           <div className="border border-zinc-600 rounded-lg flex justify-between items-center px-6 py-1 ">
             <input
-              className="outline-none text-center"
+              className="outline-none text-center w-[90%]"
               ref={caravanNumberRef}
               type="number"
-              placeholder="number"
+              placeholder="Number"
               onChange={(e) => setCaravanNumber(e.target.value)}
             />
             <span

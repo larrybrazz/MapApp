@@ -1,14 +1,15 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
-const morgan = require("morgan")
-const cors = require('cors')
+const morgan = require("morgan");
+const cors = require('cors');
 const caravansData = require("./data.js");
 
 const app = express();
 const port = 3000;
-const url =
-  "mongodb+srv://larrybrazz70:Olanrewaju47@cluster0.flnrkql.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(url);
+
+const apiUrl = import.meta.env.VITE_API_URL;
+
+const client = new MongoClient(apiUrl);
 
 app.use(cors());
 app.use(morgan("combined"));
@@ -47,7 +48,7 @@ async function storeDataInDB(client, caravansData) {
   } finally {
     session.endSession();
   }
-}
+};
 
 main().catch(console.error);
 
