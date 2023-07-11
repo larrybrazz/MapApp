@@ -1,15 +1,16 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
 const morgan = require("morgan");
-const cors = require('cors');
+const cors = require("cors");
 const caravansData = require("./data.js");
+require("dotenv").config(); // Load environment variables from .env file
 
 const app = express();
 const port = 3000;
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const url = process.env.VITE_API_URL;
 
-const client = new MongoClient(apiUrl);
+const client = new MongoClient(url);
 
 app.use(cors());
 app.use(morgan("combined"));
@@ -48,7 +49,7 @@ async function storeDataInDB(client, caravansData) {
   } finally {
     session.endSession();
   }
-};
+}
 
 main().catch(console.error);
 
@@ -57,7 +58,7 @@ app.get("/api/data", async (req, res) => {
   let client;
 
   try {
-  client = new MongoClient(url);
+    client = new MongoClient(url);
 
     await client.connect();
 
@@ -74,7 +75,7 @@ app.get("/api/data", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   } finally {
     if (client) {
-      client.close()
+      client.close();
       console.log("Disconnected from the database");
     }
   }
@@ -84,5 +85,3 @@ app.get("/api/data", async (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
-
-// Call the main function to store the data and start the server
